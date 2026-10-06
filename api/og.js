@@ -26,9 +26,9 @@ function ogGrid() {
   const g = new PX.Grid(240, 126);
   PX.card(g, [
     { segs: [["heist", "red"]], sc: 5, gap: 10 },
-    { segs: [["hold $50 of $heist.", "white"]], sc: 1, gap: 4 },
-    { segs: [["join the crew.", "white"]], sc: 1, gap: 4 },
-    { segs: [["every 6h, the job.", "dim"]], sc: 1 }
+    { segs: [["a crew. one vault.", "white"]], sc: 1, gap: 4 },
+    { segs: [["every 6h we try the door.", "white"]], sc: 1, gap: 4 },
+    { segs: [["$50 gets you in.", "gold"]], sc: 1 }
   ], { top: 18 });
   return g;
 }
