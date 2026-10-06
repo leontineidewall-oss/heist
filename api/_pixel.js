@@ -59,7 +59,7 @@
     "P": "##.#.###.#..#..",
     "Q": ".#.#.##.###..##",
     "R": "##.#.###.#.##.#",
-    "S": "####..###..####",
+    "S": ".###...#...###.",
     "T": "###.#..#..#..#.",
     "U": "#.##.##.##.####",
     "V": "#.##.##.##.#.#.",
@@ -87,7 +87,8 @@
     "/": "..#..#.#.#..#..",
     " ": "...............",
     ",": "..........#.#..",
-    "%": "#.#..#.#.#..#.#"
+    "%": "#.#..#.#.#..#.#",
+    "—": "......###......"
   };
 
   function textW(s, sc) { return s.length * 4 * sc - sc; }
@@ -245,6 +246,17 @@
     for (var i = 0; i < spots.length; i++) raccoon(g, spots[i], fy + 1 - 29, 1, crew[i + 1] || traits("crew" + i), { mirror: i === 1 });
     [[0.62, 1], [0.66, 0], [0.84, 1], [0.88, 0], [0.93, 1], [0.97, 0]].forEach(function (c) { coin(g, Math.round(W * c[0]), fy - 6 + c[1] * 2, c[1]); });
     if (!opts.still && phase % 10 < 5) sparkle(g, Math.round(W * 0.64), fy - 12);
+    if (opts.hud) {                       // logo + live board painted on the wall
+      var hs = W >= 300 ? 4 : 3, hx = 10, hy = 10;
+      text(g, "HEIST", hx, hy, hs, "red", "ol");
+      hy += hs * 5 + 9;
+      opts.hud.forEach(function (r) {
+        text(g, r[0], hx, hy, 1, "dim");
+        hy += 7;
+        text(g, r[1], hx, hy, 2, r[2] || "white", "ol");
+        hy += 16;
+      });
+    }
     return { door: [dx, dy, dr], hang: hang };
   }
 
