@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HEIST</title>
-<meta name="description" content="Hold $50 of $HEIST and you're in the crew, with your own raccoon. 85% of fees fill the vault. Every 6 hours the crew tries the job.">
+<meta name="description" content="A crew of raccoons. One vault. Every 6 hours we try the door. Crack it, we split it. $50 gets you in.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://heistsol.vercel.app/">
 <meta property="og:title" content="HEIST">
-<meta property="og:description" content="85% of fees fill the vault. Every 6 hours the crew tries the job.">
+<meta property="og:description" content="A crew. One vault. Every 6 hours we try the door. $50 gets you in.">
 <meta property="og:image" content="https://heistsol.vercel.app/api/og">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="HEIST">
-<meta name="twitter:description" content="85% of fees fill the vault. Every 6 hours the crew tries the job.">
+<meta name="twitter:description" content="A crew. One vault. Every 6 hours we try the door. $50 gets you in.">
 <meta name="twitter:image" content="https://heistsol.vercel.app/api/og">
 <meta name="theme-color" content="#0b1218">
 <link rel="icon" href="/favicon.svg">
@@ -52,8 +52,10 @@ nav .wrap{display:flex;align-items:center;gap:18px;height:64px}
 .stage{position:relative;background:var(--bg)}
 .stage canvas{display:block;width:100%;height:auto}
 .bar{margin-top:22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 28px;align-items:center}
-.bar p{margin:0;font-size:19px;color:var(--mut);max-width:560px}
-.bar p b{color:var(--ink)}
+.pitch h2{margin:0;font:400 clamp(28px,4.4vw,52px)/1.02 var(--px);text-transform:uppercase;text-shadow:4px 4px 0 #05080b}
+.pitch h2 em{font-style:normal;color:var(--gold)}
+.pitch p{margin:12px 0 0;font-size:19px;color:var(--mut);max-width:560px}
+.pitch p b{color:var(--ink)}
 .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .check{display:flex;border:3px solid #05080b;box-shadow:4px 4px 0 #05080b;background:#0d171e;min-width:0}
 .check input{width:290px;min-width:0;border:0;background:none;padding:10px 12px;font:500 13px var(--mono);outline:none}
@@ -81,12 +83,6 @@ section.sec{padding-top:80px}
 .mate span{display:block;font:500 12px var(--mono);color:var(--dim)}
 .mate i{font-style:normal;font:600 13px var(--mono);color:var(--ink)}
 .empty{border:3px dashed var(--line);padding:24px;color:var(--dim);font:500 14px var(--mono);text-align:center;background:rgba(13,23,30,.8)}
-.rules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
-.rule{background:var(--card);padding:18px}
-.rule canvas{width:64px;height:64px;display:block;margin-bottom:12px;background:#0d171e;border:3px solid #05080b}
-.rule .k{font:400 12px var(--px);color:var(--red)}
-.rule h3{margin:6px 0 6px;font-size:20px;letter-spacing:-.02em;line-height:1.15}
-.rule p{margin:0;color:var(--mut);font-size:15px}
 .vault{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px;align-items:start}
 .vbox{background:var(--card);padding:18px;font:500 14px var(--mono);color:var(--mut)}
 .vbox .lab{font:400 12px var(--px);color:var(--dim);text-transform:uppercase}
@@ -94,10 +90,6 @@ section.sec{padding-top:80px}
 .vbox a{color:var(--ink)}
 .log div{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:2px solid var(--line);font:500 13px var(--mono);color:var(--mut)}
 .log a{color:var(--gold);text-decoration:none}
-table.cannot{width:100%;border-collapse:collapse;font-size:16px;background:var(--card)}
-.cannot th{text-align:left;font:400 12px var(--px);color:var(--dim);padding:14px 16px;border-bottom:3px solid #05080b;text-transform:uppercase}
-.cannot td{padding:14px 16px;border-bottom:2px solid var(--line);vertical-align:top;color:var(--mut)}
-.cannot td:first-child{color:var(--ink);font-weight:700;width:40%}
 footer{margin-top:90px;border-top:4px solid #05080b;background:rgba(8,13,17,.92);padding-top:22px;padding-bottom:40px;font:400 12px var(--px);color:var(--dim);text-transform:uppercase}
 footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
 dialog{border:4px solid #05080b;box-shadow:0 0 0 3px var(--red);background:#0d171e;color:var(--ink);padding:20px;width:min(380px,calc(100vw - 32px))}
@@ -110,7 +102,6 @@ dialog h3{margin:0 0 12px;font:400 16px var(--px);text-transform:uppercase}
 .hidden{display:none!important}
 @media (max-width:980px){
   .bar{grid-template-columns:minmax(0,1fr)}
-  .rules{grid-template-columns:repeat(2,minmax(0,1fr))}
   .vault{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:620px){
@@ -129,19 +120,72 @@ dialog h3{margin:0 0 12px;font:400 16px var(--px);text-transform:uppercase}
   .check input{width:auto;flex:1}
   .you{grid-template-columns:minmax(0,1fr)}
   .you canvas{max-width:220px}
-  .rules{grid-template-columns:minmax(0,1fr)}
-  .cannot td:first-child{width:48%}
 }
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+.tape{height:16px;background:repeating-linear-gradient(-45deg,var(--gold) 0 14px,#05080b 14px 28px);border-top:3px solid #05080b;border-bottom:3px solid #05080b}
+.ticker{overflow:hidden;background:#05080b;border-bottom:4px solid #05080b;white-space:nowrap}
+.ticker .run{display:inline-flex;animation:run 38s linear infinite;padding:8px 0}
+.ticker span{font:400 13px var(--px);text-transform:uppercase;color:var(--mut);padding:0 18px}
+.ticker span b{font-weight:400;color:var(--gold)}.ticker span i{font-style:normal;color:var(--red)}
+.ticker span::after{content:"\25C6";color:var(--redD);margin-left:36px}
+@keyframes run{to{transform:translateX(-50%)}}
+.job{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:24px}
+.panel{background:var(--card);padding:22px}
+.panel .lab{font:400 12px var(--px);color:var(--dim);text-transform:uppercase}
+.odds{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:6px 0 16px}
+.odds .big{font:400 clamp(56px,8vw,88px)/1 var(--px);color:var(--ink);text-shadow:5px 5px 0 #05080b}
+.odds .sub{font:500 14px var(--mono);color:var(--mut)}
+.meter{display:grid;grid-template-columns:repeat(16,1fr);gap:4px;padding:6px;background:#05080b}
+.meter i{height:30px;background:#1a2a35}
+.meter i.on{background:var(--red);box-shadow:inset 0 -6px 0 var(--redD),inset 0 4px 0 #ff7a87}
+.meter i.max{background:var(--gold);box-shadow:inset 0 -6px 0 var(--goldD,#c9861c),inset 0 4px 0 #fff1a8}
+.scale{display:flex;justify-content:space-between;margin-top:8px;font:400 11px var(--px);color:var(--dim)}
+.oddsnote{margin:16px 0 0;font:500 14px var(--mono);color:var(--mut)}
+.oddsnote b{color:var(--gold);font-weight:700}
+.slots{display:grid;gap:10px;margin-top:12px}
+.slot{display:grid;grid-template-columns:86px minmax(0,1fr) auto;align-items:center;gap:12px;padding:12px 14px;background:#0d171e;border:3px solid #05080b}
+.slot b{font:400 20px var(--px);color:var(--mut)}
+.slot span{font:500 13px var(--mono);color:var(--dim)}
+.slot em{font-style:normal;font:400 11px var(--px);color:var(--dim);text-transform:uppercase}
+.slot.next{background:#2a1218;border-color:var(--red);box-shadow:4px 4px 0 #05080b}
+.slot.next b{color:var(--red)}.slot.next em{color:var(--ink)}
+.crewhead{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:baseline;justify-content:space-between;margin:-8px 0 20px;font:500 14px var(--mono);color:var(--mut)}
+.crewhead b{font:400 22px var(--px);color:var(--gold)}
+.mate.seat{border-style:dashed;background:rgba(13,23,30,.6);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:150px;color:var(--dim);box-shadow:none;border:3px dashed var(--line)}
+.mate.seat b{color:var(--mut)}
+.mate.seat .q{font:400 40px var(--px);color:var(--line);line-height:1;margin-bottom:10px}
+.plan{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;counter-reset:p}
+.step{background:var(--card);display:flex;flex-direction:column}
+.step canvas{width:100%;height:auto;display:block;border-bottom:4px solid #05080b}
+.step .in{padding:16px 16px 18px}
+.step .k{font:400 12px var(--px);color:var(--red)}
+.step h3{margin:6px 0 6px;font:400 19px/1.15 var(--px);text-transform:uppercase}
+.step p{margin:0;color:var(--mut);font-size:15px}
+.vnum{display:flex;align-items:center;gap:14px}
+.vnum canvas{width:56px;height:56px}
+.cta{margin-top:96px;text-align:center;padding:44px 20px 40px;background:var(--card);position:relative}
+.cta canvas{width:min(560px,100%);height:auto;display:block;margin:0 auto 18px}
+.cta h2{margin:0;font:400 clamp(30px,5vw,56px)/1 var(--px);text-transform:uppercase;text-shadow:4px 4px 0 #05080b}
+.cta h2 em{font-style:normal;color:var(--gold)}
+.cta p{margin:12px auto 22px;color:var(--mut);max-width:520px}
+.cta .actions{justify-content:center}
+footer{margin-top:0}
+footer .wrap{align-items:center}
+footer .brand{font-size:16px}
+@media (max-width:980px){.job{grid-template-columns:minmax(0,1fr)}.plan{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.plan{grid-template-columns:minmax(0,1fr)}.pitch p{font-size:16px}.slot{grid-template-columns:70px minmax(0,1fr) auto}.slot b{font-size:17px}.ticker span{font-size:12px}.cta{margin-top:72px;padding:30px 16px}}
+@media (prefers-reduced-motion:reduce){.ticker .run{animation:none}}
 </style>
 </head>
 <body>
 <nav><div class="wrap">
   <a class="brand" href="#top"><canvas id="mark" width="26" height="29" class="px" aria-hidden="true"></canvas>HEIST</a>
-  <div class="navlinks"><a href="#crew">crew</a><a href="#rules">rules</a><a href="#vault">vault</a></div>
-  <button class="chip" id="navHeist" type="button" title="$HEIST contract address"><b>$HEIST</b> <span id="ca">not launched</span></button>
+  <div class="navlinks"><a href="#job">job</a><a href="#crew">crew</a><a href="#plan">plan</a><a href="#vault">vault</a></div>
+  <button class="chip" id="navHeist" type="button" title="copy contract address"><b>CA</b> <span id="ca">—</span></button>
   <button class="btn sm" id="navConnect" type="button">connect</button>
 </div></nav>
+<div class="ticker" aria-hidden="true"><div class="run" id="tick"></div></div>
 
 <main id="top">
 <header class="hero wrap">
@@ -150,9 +194,12 @@ dialog h3{margin:0 0 12px;font:400 16px var(--px);text-transform:uppercase}
     <canvas id="scene" class="px" width="320" height="124" aria-label="the vault room: vault balance, next job and odds"></canvas>
   </div>
   <div class="sr" id="board" aria-live="polite">vault <span id="bVault">—</span>, next job <span id="bJob">—</span>, odds <span id="bOdds">—</span></div>
-  <div class="status"><span id="stLeft">vault read from chain · market from dexscreener</span><span id="stRight">jobs at 00:00 · 06:00 · 12:00 · 18:00 utc</span></div>
+  <div class="status"><span id="stLeft">—</span><span id="stRight">jobs at 00:00 · 06:00 · 12:00 · 18:00 utc</span></div>
   <div class="bar">
-    <p>Hold <b>$50 of $HEIST</b> and you're in the crew, with your own raccoon. <b>85% of fees</b> fill the vault. <b>Every 6 hours</b> the crew tries the job.</p>
+    <div class="pitch">
+      <h2>a crew of raccoons.<br><em>one vault.</em></h2>
+      <p>Every 6 hours we try the door. Crack it, we split it. Jam it, it gets fatter. <b>$50 gets you in.</b></p>
+    </div>
     <div class="actions">
       <button class="btn" id="connect" type="button">connect wallet</button>
       <form class="check" id="check" autocomplete="off">
@@ -177,55 +224,70 @@ dialog h3{margin:0 0 12px;font:400 16px var(--px);text-transform:uppercase}
       <div class="actions">
         <button class="btn sm gold" id="save" type="button">save my raccoon</button>
         <a class="btn sm alt" id="post" href="#" target="_blank" rel="noopener">post on x</a>
-        <a class="btn sm alt hidden" id="buy" href="#" target="_blank" rel="noopener">buy $HEIST</a>
+        <a class="btn sm alt hidden" id="buy" href="#" target="_blank" rel="noopener">buy</a>
       </div>
     </div>
   </div>
 </header>
 
-<section class="sec wrap" id="crew">
-  <h2 class="t"><span>01 / THE CREW</span>biggest crew right now</h2>
-  <div id="crewBox"><div class="empty">—<br>the crew forms when $HEIST launches.</div></div>
+<section class="sec wrap" id="job">
+  <h2 class="t"><span>01 / THE JOB</span>the odds move with the buys</h2>
+  <div class="job">
+    <div class="panel frame">
+      <div class="lab">odds on the next job</div>
+      <div class="odds"><span class="big" id="oBig">—</span><span class="sub" id="oSub">buys in the last 6h: —</span></div>
+      <div class="meter" id="meter"></div>
+      <div class="scale"><span>0%</span><span>40%</span><span>80% max</span></div>
+      <p class="oddsnote" id="oNote">Every 10 buys adds 1%.</p>
+    </div>
+    <div class="panel frame">
+      <div class="lab">job times · your clock</div>
+      <div class="slots" id="slots"></div>
+    </div>
+  </div>
 </section>
 
-<section class="sec wrap" id="rules">
-  <h2 class="t"><span>02 / THE RULES</span>hold. wait. hit the vault.</h2>
-  <div class="rules">
-    <div class="rule frame"><canvas class="px ic" width="32" height="32" data-ic="0" aria-hidden="true"></canvas><div class="k">01 · HOLD $50</div><h3>you're in the crew</h3><p>Any wallet holding $50 or more of $HEIST is crew. Your raccoon and codename come from your address, so they're yours for good.</p></div>
-    <div class="rule frame"><canvas class="px ic" width="32" height="32" data-ic="1" aria-hidden="true"></canvas><div class="k">02 · 85% OF FEES</div><h3>the vault fills</h3><p>85% of $HEIST's creator fees go to the vault wallet. It's public: the balance above is read from chain.</p></div>
-    <div class="rule frame"><canvas class="px ic" width="32" height="32" data-ic="2" aria-hidden="true"></canvas><div class="k">03 · EVERY 6H</div><h3>the job</h3><p>At 00:00, 06:00, 12:00 and 18:00 UTC the crew tries the vault. Odds are 20% plus 1% per 10 buys in the last 6 hours, up to 80%. A win splits the vault equally across the crew. A miss rolls it to the next job.</p></div>
-    <div class="rule frame"><canvas class="px ic" width="32" height="32" data-ic="3" aria-hidden="true"></canvas><div class="k">04 · CAUGHT</div><h3>sell and sit out</h3><p>Under $50 when the job starts and your raccoon sits that job out. Get back above $50 and you're back on the next one.</p></div>
+<section class="sec wrap" id="crew">
+  <h2 class="t"><span>02 / THE CREW</span>who's going in</h2>
+  <div class="crewhead"><span>biggest crew members right now</span><span>crew on the board <b id="crewN">—</b></span></div>
+  <div id="crewBox"><div class="empty">—<br>the crew forms at launch.</div></div>
+</section>
+
+<section class="sec wrap" id="plan">
+  <h2 class="t"><span>03 / THE PLAN</span>hold. wait. hit the vault.</h2>
+  <div class="plan">
+    <div class="step frame"><canvas class="px ic" width="96" height="60" data-ic="0" aria-hidden="true"></canvas><div class="in"><div class="k">STEP 1 · $50</div><h3>get in</h3><p>Hold $50 and you're crew. Your raccoon and codename come from your wallet address. Nobody else gets that one.</p></div></div>
+    <div class="step frame"><canvas class="px ic" width="96" height="60" data-ic="1" aria-hidden="true"></canvas><div class="in"><div class="k">STEP 2 · 85%</div><h3>fill the vault</h3><p>85% of creator fees go straight into the vault wallet. Every move is on chain.</p></div></div>
+    <div class="step frame"><canvas class="px ic" width="96" height="60" data-ic="2" aria-hidden="true"></canvas><div class="in"><div class="k">STEP 3 · EVERY 6H</div><h3>hit the door</h3><p>At 00, 06, 12 and 18 UTC the crew goes in. Odds start at 20% and climb 1% per 10 buys, up to 80%.</p></div></div>
+    <div class="step frame"><canvas class="px ic" width="96" height="60" data-ic="3" aria-hidden="true"></canvas><div class="in"><div class="k">STEP 4 · THE SPLIT</div><h3>crack or jam</h3><p>Crack it: the vault splits equally across the crew. Jam it: everything rolls into the next job. Under $50 at go time, you sit that one out.</p></div></div>
   </div>
 </section>
 
 <section class="sec wrap" id="vault">
-  <h2 class="t"><span>03 / THE VAULT</span>every move on chain</h2>
+  <h2 class="t"><span>04 / THE VAULT</span>every move on chain</h2>
   <div class="vault">
     <div class="vbox frame">
       <div class="lab">vault balance</div>
-      <div class="big" id="vBig">—</div>
+      <div class="vnum"><canvas id="vIc" class="px" width="28" height="28" aria-hidden="true"></canvas><div class="big" id="vBig">—</div></div>
       <div id="vAddr">vault address: —</div>
     </div>
     <div class="vbox frame"><div class="lab">latest vault transactions</div><div class="log" id="vLog"><div><span>—</span><span>no vault yet</span></div></div></div>
   </div>
 </section>
 
-<section class="sec wrap" id="limits">
-  <h2 class="t"><span>04 / LIMITS</span>what it can't do</h2>
-  <table class="cannot frame">
-    <thead><tr><th>it cannot</th><th>so it</th></tr></thead>
-    <tbody>
-      <tr><td>run the job by itself on chain</td><td>has the vault keeper run each job on schedule. Every payout leaves the public vault wallet, listed above with its transaction.</td></tr>
-      <tr><td>promise a win</td><td>publishes the odds rule. Most jobs can miss; this is a game of chance, not a yield.</td></tr>
-      <tr><td>see every holder from a phone</td><td>shows the biggest crew members here and checks any wallet you paste.</td></tr>
-      <tr><td>keep your character if you sell</td><td>benches your raccoon below $50 and brings it back when you return.</td></tr>
-    </tbody>
-  </table>
+<section class="wrap">
+  <div class="cta frame">
+    <canvas id="lineup" class="px" width="140" height="40" aria-hidden="true"></canvas>
+    <h2>$50 gets you <em>in.</em></h2>
+    <p>Connect or paste a wallet to meet your raccoon.</p>
+    <div class="actions"><button class="btn" id="connect2" type="button">connect wallet</button><a class="btn alt hidden" id="buy2" href="#" target="_blank" rel="noopener">buy</a></div>
+  </div>
 </section>
 </main>
 
+<div class="tape" style="margin-top:72px" aria-hidden="true"></div>
 <footer><div class="wrap">
-  <span>HEIST · a game of chance · not financial advice</span>
+  <a class="brand" href="#top">HEIST</a>
   <span><a href="https://github.com/leontineidewall-oss/heist" target="_blank" rel="noopener">code</a></span>
 </div></footer>
 
@@ -556,6 +618,30 @@ dialog h3{margin:0 0 12px;font:400 16px var(--px);text-transform:uppercase}
     var hh = Math.floor(s / 3600), mm = Math.floor(s % 3600 / 60), ss = s % 60;
     S.jobTxt = (hh < 10 ? "0" : "") + hh + ":" + (mm < 10 ? "0" : "") + mm + ":" + (ss < 10 ? "0" : "") + ss;
     $("bJob").textContent = S.jobTxt;
+    slots(); ticker();
+  }
+  function slots() {
+    var now = Date.now(), nj = nextJob(now), out = "";
+    for (var k = 0; k < 4; k++) {
+      var t = nj + k * 6 * 3600000, d = new Date(t), hh = d.getUTCHours(), left = Math.round((t - now) / 3600000);
+      out += '<div class="slot' + (k === 0 ? " next" : "") + '"><b>' + (hh < 10 ? "0" : "") + hh + ':00</b><span>' + clock(d) + '</span><em>' + (k === 0 ? "next · " + S.jobTxt : "in " + left + "h") + "</em></div>";
+    }
+    $("slots").innerHTML = out;
+  }
+  function ticker() {
+    var crewN = S.crewList ? S.crewList.length : null;
+    var items = ["next job <i>" + (S.jobTxt || "—") + "</i>", "vault <b>" + (S.vaultSol == null ? "—" : S.vaultSol.toFixed(2) + " sol") + "</b>", "odds <b>" + (S.oddsTxt || "—") + "</b>",
+      "crew on the board <b>" + (crewN == null ? "—" : crewN) + "</b>", "85% of fees fill the vault", "$50 gets you in"];
+    var one = items.map(function (x) { return "<span>" + x + "</span>"; }).join("");
+    $("tick").innerHTML = one + one;
+  }
+  function oddsPanel() {
+    var b = S.market ? S.market.buys6h : null, o = odds(b), segs = "";
+    for (var i = 0; i < 16; i++) segs += "<i" + (o != null && (i + 1) * 5 <= o ? (o >= 80 ? ' class="on max"' : ' class="on"') : "") + "></i>";
+    $("meter").innerHTML = segs;
+    $("oBig").textContent = o == null ? "—" : o + "%";
+    $("oSub").textContent = "buys in the last 6h: " + (b == null ? "—" : b);
+    $("oNote").innerHTML = o == null ? "Every 10 buys adds 1%." : o >= 80 ? "<b>Max odds.</b> 80% is the cap." : "<b>" + (10 - b % 10) + " more buys</b> and the odds go to " + (o + 1) + "%.";
   }
 
   // ---------- live data ----------
@@ -614,8 +700,9 @@ dialog h3{margin:0 0 12px;font:400 16px var(--px);text-transform:uppercase}
       }).join("");
     var left = [];
     left.push(CFG.vault ? (S.vaultSol == null ? "vault unreadable right now" : "vault live from chain") : "vault not set yet");
-    left.push(!CFG.mint ? "$HEIST not launched" : S.marketOk === false ? "market data unavailable right now" : m ? "market live from dexscreener" + (S.marketAt ? " · " + clock(S.marketAt) : "") : "no market yet");
+    left.push(!CFG.mint ? "market not live yet" : S.marketOk === false ? "market data unavailable right now" : m ? "market live from dexscreener" + (S.marketAt ? " · " + clock(S.marketAt) : "") : "no market yet");
     $("stLeft").textContent = left.join(" · ");
+    oddsPanel(); ticker();
     renderCrew(price);
     if (S.me) renderMe();
     drawScene();
@@ -628,15 +715,17 @@ dialog h3{margin:0 0 12px;font:400 16px var(--px);text-transform:uppercase}
   }
   function renderCrew(price) {
     var box = $("crewBox");
-    if (!CFG.mint) { box.innerHTML = '<div class="empty">—<br>the crew forms when $HEIST launches.</div>'; return; }
+    S.crewList = null; $("crewN").textContent = "—";
+    if (!CFG.mint) { box.innerHTML = '<div class="empty">—<br>the crew forms at launch.</div>'; return; }
     if (S.crew == null) { box.innerHTML = '<div class="empty">—<br>holder data unavailable right now.</div>'; return; }
     var list = S.crew.slice();
-    if (price != null) list = list.filter(function (c) { return c.ui * price >= 50; });
+    if (price != null) { list = list.filter(function (c) { return c.ui * price >= 50; }); S.crewList = list; $("crewN").textContent = list.length; }
     if (!list.length) { box.innerHTML = '<div class="empty">—<br>' + (price == null ? "no price yet, so nobody can be checked against $50." : "nobody in the top 20 holds $50 yet.") + "</div>"; return; }
     box.innerHTML = '<div class="crew">' + list.map(function (c, i) {
       var t = PX.traits(c.owner);
       return '<div class="mate frame"><canvas class="px" width="26" height="29" data-o="' + c.owner + '"></canvas><b>' + esc(t.name) + "</b><span>" + short(c.owner) + "</span><i>" + (price != null ? usd(c.ui * price) : amt(c.ui)) + "</i></div>";
-    }).join("") + "</div>";
+    }).join("") + '<button class="mate seat" type="button" id="seat"><span class="q">?</span><b>your seat</b><span>check your wallet</span></button></div>';
+    $("seat").addEventListener("click", function () { $("checkIn").focus(); window.scrollTo({ top: 0, behavior: REDUCED ? "auto" : "smooth" }); });
     [].forEach.call(box.querySelectorAll("canvas[data-o]"), function (cv) { mini(cv, cv.dataset.o, false); });
   }
 
@@ -680,15 +769,15 @@ dialog h3{margin:0 0 12px;font:400 16px var(--px);text-transform:uppercase}
     $("youName").textContent = me.t.name;
     $("youAddr").textContent = me.addr;
     var tag = $("youTag");
-    if (me.state === "prelaunch") { tag.className = "tag wait"; tag.textContent = "READY · $HEIST NOT LIVE"; }
+    if (me.state === "prelaunch") { tag.className = "tag wait"; tag.textContent = "READY · NOT LIVE YET"; }
     else if (me.state !== "ok") { tag.className = "tag wait"; tag.textContent = me.state === "fail" ? "—" : "CHECKING…"; }
     else if (val == null) { tag.className = "tag wait"; tag.textContent = me.ui ? "HOLDING · NO PRICE YET" : "NOT HOLDING"; }
     else if (val >= 50) { tag.className = "tag in"; tag.textContent = "IN THE CREW"; }
     else { tag.className = "tag out"; tag.textContent = me.ui ? "BENCHED · UNDER $50" : "NOT IN THE CREW"; }
-    $("youHold").textContent = me.ui == null ? "—" : amt(me.ui) + " $HEIST";
+    $("youHold").textContent = me.ui == null ? "—" : amt(me.ui);
     $("youVal").textContent = val == null ? "—" : usd(val);
     $("youNeed").textContent = val == null ? "—" : val >= 50 ? "you're in" : usd(50 - val) + " more";
-    var txt = "my heist raccoon: \"" + me.t.name + "\". hold $50 of $HEIST and you're in the crew.";
+    var txt = "my heist raccoon: \"" + me.t.name + "\". every 6 hours we try the door. $50 gets you in.";
     $("post").href = "https://x.com/intent/post?text=" + encodeURIComponent(txt) + "&url=" + encodeURIComponent(SITE);
     $("buy").classList.toggle("hidden", !CFG.mint);
     if (CFG.mint) $("buy").href = S.market && S.market.url ? S.market.url : "https://dexscreener.com/solana/" + CFG.mint;
@@ -746,17 +835,25 @@ dialog h3{margin:0 0 12px;font:400 16px var(--px);text-transform:uppercase}
   }
   $("navConnect").addEventListener("click", pick);
   $("connect").addEventListener("click", pick);
+  $("connect2").addEventListener("click", pick);
 
   // ---------- rule icons ----------
+  function paint(cv, g) { var c = cv.getContext("2d"), img = c.createImageData(g.w, g.h); g.rgba(img.data); c.putImageData(img, 0, 0); }
   function icons() {
     [].forEach.call(document.querySelectorAll("canvas[data-ic]"), function (cv) {
-      var g = new PX.Grid(32, 32), n = +cv.dataset.ic; g.px.fill(PX.PAL.bg2);
-      if (n === 0) PX.raccoon(g, 3, 2, 1, PX.traits("rule-crew"));
-      if (n === 1) { PX.vaultDoor(g, 16, 15, 12); PX.coin(g, 2, 25, true); PX.coin(g, 23, 26, false); }
-      if (n === 2) { PX.text(g, "6H", 5, 9, 3, "red", "ol"); }
-      if (n === 3) PX.raccoon(g, 3, 2, 1, PX.traits("rule-out"), { dim: true });
-      var img = cv.getContext("2d").createImageData(32, 32); g.rgba(img.data); cv.getContext("2d").putImageData(img, 0, 0);
+      var g = new PX.Grid(96, 60), n = +cv.dataset.ic, fy = 50;
+      PX.wall(g, 10); PX.floor(g, fy, 5);
+      if (n === 0) { PX.raccoon(g, 6, fy - 28, 1, PX.traits("plan-a")); PX.raccoon(g, 64, fy - 28, 1, PX.traits("plan-c"), { mirror: true }); PX.raccoon(g, 35, fy - 28, 1, PX.traits("plan-b")); PX.sparkle(g, 48, 8); }
+      if (n === 1) { PX.vaultDoor(g, 62, 26, 21); PX.coin(g, 10, 14, true); PX.coin(g, 22, 28, false); PX.coin(g, 14, 40, true); PX.coin(g, 30, 44, false); PX.sparkle(g, 24, 10); }
+      if (n === 2) { PX.vaultDoor(g, 78, 26, 22); PX.laser(g, 0, 12, 96, 38); PX.laser(g, 0, 40, 96, 8); PX.raccoon(g, 18, fy - 28, 1, PX.traits("plan-d")); }
+      if (n === 3) { PX.raccoon(g, 6, fy - 28, 1, PX.traits("plan-e")); PX.raccoon(g, 64, fy - 28, 1, PX.traits("plan-f"), { mirror: true });
+        [[36, 44, 1], [44, 44, 1], [52, 44, 1], [40, 37, 1], [48, 37, 1], [44, 30, 1]].forEach(function (c) { PX.coin(g, c[0], c[1], c[2]); }); PX.sparkle(g, 46, 22); }
+      paint(cv, g);
     });
+    var v = new PX.Grid(28, 28); v.px.fill(-1); PX.vaultDoor(v, 14, 14, 11); paint($("vIc"), v);
+    var l = new PX.Grid(140, 40); l.px.fill(-1);
+    ["lineup-1", "lineup-2", "lineup-3", "lineup-4", "lineup-5"].forEach(function (k, i) { PX.raccoon(l, 2 + i * 27, 10, 1, PX.traits(k), { mirror: i > 2 }); });
+    paint($("lineup"), l);
   }
   icons();
 
@@ -769,6 +866,7 @@ dialog h3{margin:0 0 12px;font:400 16px var(--px);text-transform:uppercase}
   fetch("/api/config").then(function (r) { return r.json(); }).then(function (j) { if (j) CFG = j; }).catch(function () {}).then(function () {
     if (CFG.mint) {
       $("ca").textContent = short(CFG.mint);
+      $("buy2").href = "https://dexscreener.com/solana/" + CFG.mint; $("buy2").classList.remove("hidden");
       $("navHeist").addEventListener("click", function () {
         if (navigator.clipboard) navigator.clipboard.writeText(CFG.mint).then(function () { $("ca").textContent = "copied"; setTimeout(function () { $("ca").textContent = short(CFG.mint); }, 1400); });
       });
